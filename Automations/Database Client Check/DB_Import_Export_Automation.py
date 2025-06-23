@@ -565,6 +565,7 @@ for col_name, insert_index in new_columns:
 
 # In[ ]:
 
+#Case_Serv = Case_Serv.copy()
 
 # SERVICE COLUMN
 
