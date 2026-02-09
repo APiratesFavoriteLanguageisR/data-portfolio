@@ -35,3 +35,11 @@ All data used in this project is publicly available.
 This project documents key data quality considerations, including handling of numeric formatting inconsistencies and reconciliation between raw and transformed values.
 
 ## Repository Structure
+/data # Raw or minimally processed public data
+/scripts # R scripts for cleaning, analysis, and modeling
+/figures # Generated plots and charts
+/outputs # Summary tables and results
+
+
+## Ethics and Reproducibility
+All analyses use public data. No proprietary or student-level identifiable information is included.
