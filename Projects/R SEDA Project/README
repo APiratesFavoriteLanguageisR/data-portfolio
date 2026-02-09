@@ -1,0 +1,37 @@
+# California Education Outcomes Analysis (SEDA)
+
+## Overview
+This project analyzes county-level educational outcomes in California using data from the Stanford Education Data Archive (SEDA). The goal is to examine regional performance differences, equity gaps across student subgroups, and demographic factors associated with variation in achievement.
+
+## Research Questions
+- How do academic outcomes vary across California counties?
+- Which demographic characteristics are most strongly correlated with performance differences?
+- How do equity gaps differ by race/ethnicity and gender at the county level?
+
+## Data Source
+Stanford Education Data Archive (SEDA), county-level datasets.  
+All data used in this project is publicly available.
+
+## Methods
+- Data cleaning and transformation using tidyverse
+- Weighted and unweighted county-level aggregations
+- Subgroup comparisons by race/ethnicity and gender
+- Exploratory statistical modeling to assess correlates of performance
+- Visualization of geographic and demographic patterns
+
+## Key Outputs
+- County-level performance summaries
+- Equity gap visualizations across subgroups
+- Top and bottom performing county comparisons
+- Model outputs identifying key predictors
+
+## Tools and Libraries
+- R
+- tidyverse
+- ggplot2
+- (additional packages as applicable)
+
+## Notes on Data Quality
+This project documents key data quality considerations, including handling of numeric formatting inconsistencies and reconciliation between raw and transformed values.
+
+## Repository Structure
