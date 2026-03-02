@@ -1,0 +1,17 @@
+gcp:
+  project_id: "YOUR_GCP_PROJECT_ID"
+  dataset_id: "portfolio_nyc_taxi"
+
+source:
+  bq_public_table: "bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2022"
+  start_date: "2022-01-01"
+  end_date: "2022-01-31"
+
+targets:
+  raw_table: "raw_yellow_trips"
+  staging_table: "stg_yellow_trips"
+  mart_table: "mart_yellow_trips"
+
+runtime:
+  write_disposition: "WRITE_TRUNCATE"  # overwrite by default
+  log_level: "INFO"
