@@ -4,6 +4,7 @@ import logging
 import os
 from typing import Any, Dict, List
 import copy
+from extract import extract_data
 
 def parse_args():
     argparser = argparse.ArgumentParser(description="ETL Pipeline for NYC Taxi Data")
@@ -61,7 +62,9 @@ def main():
     logging.basicConfig(format='{asctime} - {levelname} - {message}', style='{', level=logging.INFO)
     logging.info(f"Resolved Configurations: {resolved_configs}")
 
-
+#Import extract_data function from extract.py, call it after resolving configs and log when extraction completes
+    data = extract_data(resolved_configs)
+    logging.info("Data extraction completed.")
 
 if __name__ == "__main__":
     main()
