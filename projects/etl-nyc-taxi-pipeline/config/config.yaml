@@ -1,5 +1,5 @@
 gcp:
-  project_id: "your-gcp-project-id"
+  project_id: "forward-walker-464619-e9"
   dataset_id: "portfolio_nyc_taxi"
 
 source:
@@ -13,5 +13,5 @@ targets:
   mart_table: "mart_yellow_trips"
 
 runtime:
-  write_disposition: "WRITE_TRUNCATE"
+  write_disposition: "WRITE_TRUNCATE"  # overwrite by default
   log_level: "INFO"

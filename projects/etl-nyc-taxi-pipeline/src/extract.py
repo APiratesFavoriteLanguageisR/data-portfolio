@@ -27,6 +27,7 @@ logic in `main.py`.
 from google.cloud import bigquery
 import logging
 
+
 def extract_data(config: dict):
     
     """
@@ -54,8 +55,7 @@ def extract_data(config: dict):
     # Initialize BigQuery client using the configured project ID.
     # The project acts as the execution context for queries.
     logging.info(f"Initializing BigQuery client for project: {config['gcp']['project_id']}")
-    project_id = config["gcp"]["project_id"]
-    client = bigquery.Client(project=project_id)
+    client = bigquery.Client(project=config["gcp"]["project_id"])
         
     # Construct SQL query to extract filtered taxi records.
     query = f"""
