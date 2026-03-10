@@ -14,6 +14,15 @@ Pandas
 BigQuery
 YAML configuration
 
+## Setup
+
+1. Clone the repository
+2. Copy the example configuration
+
+cp config/config.example.yaml config/config.yaml
+
+3. Update the configuration with your environment settings
+
 ## Current Features
 Data extraction from BigQuery
 Config driven transformations
