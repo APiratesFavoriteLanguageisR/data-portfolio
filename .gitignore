@@ -7,7 +7,8 @@ __pycache__/
 *.so
 
 # Configuration files
-config/config.yaml
+config/*.yaml
+!config/config.example.yaml
 
 # Distribution / packaging
 .Python

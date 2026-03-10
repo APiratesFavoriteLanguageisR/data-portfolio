@@ -1,0 +1,37 @@
+gcp:
+  project_id: "forward-walker-464619-e9"
+  dataset_id: "portfolio_nyc_taxi"
+
+source:
+  bq_public_table: "bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2022"
+  start_date: "2022-01-01"
+  end_date: "2022-01-31"
+
+targets:
+  raw_table: "raw_yellow_trips"
+  staging_table: "stg_yellow_trips"
+  mart_table: "mart_yellow_trips"
+
+runtime:
+  write_disposition: "WRITE_TRUNCATE"  # overwrite by default
+  log_level: "INFO"
+
+
+transform:
+  datetime_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+
+  required_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+    - "passenger_count"
+    - "trip_distance"
+
+  numeric_columns:
+    - "passenger_count"
+    - "trip_distance"
+
+  drop_columns:
+    - "store_and_fwd_flag"
+    - "ratecode_id"
