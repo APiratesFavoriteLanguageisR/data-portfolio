@@ -15,3 +15,23 @@ targets:
 runtime:
   write_disposition: "WRITE_TRUNCATE"  # overwrite by default
   log_level: "INFO"
+
+
+transform:
+  datetime_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+
+  required_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+    - "passenger_count"
+    - "trip_distance"
+
+  numeric_columns:
+    - "passenger_count"
+    - "trip_distance"
+
+  drop_columns:
+    - "store_and_fwd_flag"
+    - "ratecode_id"

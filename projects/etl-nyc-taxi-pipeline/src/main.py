@@ -29,6 +29,7 @@ import os
 from typing import Any, Dict, List
 import copy
 from extract import extract_data
+from transform import transform_data
 import time
 from utils.pipeline_utils import run_stage
 
@@ -226,9 +227,13 @@ def main():
         f"| end_date={resolved_configs['source']['end_date']}"
     )
 
-    data = run_stage("Extract", extract_data, resolved_configs)
+    raw_data = run_stage("Extract", extract_data, resolved_configs)
     
     logging.info("Data extraction completed.")
+    
+    clean_data = run_stage("Transform", transform_data, raw_data, resolved_configs)
+    
+    logging.info("Data transformation completed.")
     
     pipeline_end = time.time()
     
