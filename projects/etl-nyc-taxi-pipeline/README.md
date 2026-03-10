@@ -19,7 +19,7 @@ YAML configuration
 1. Clone the repository
 2. Copy the example configuration
 
-cp config/config.example.yaml config/config.yaml
+    cp config/config.example.yaml config/config.yaml
 
 3. Update the configuration with your environment settings
 
