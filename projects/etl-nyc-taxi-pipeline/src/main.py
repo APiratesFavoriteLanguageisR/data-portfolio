@@ -28,10 +28,7 @@ import logging
 import os
 from typing import Any, Dict, List
 import copy
-from extract import extract_data
-from transform import transform_data
-import time
-from utils.pipeline_utils import run_stage
+from src.pipeline.run_etl_pipeline import run_pipeline
 
 # Initialize logging for the pipeline
 logging.basicConfig(
@@ -204,8 +201,6 @@ def main():
     5. Execute extraction stage
     """
     
-    pipeline_start = time.time()
-    
     # Parse optional command line arguments
     args = parse_args()
     
@@ -221,25 +216,7 @@ def main():
     
     logging.info("Pipeline initialization complete.")
     
-    logging.info(
-        f"Pipeline started | source_table={resolved_configs['source']['bq_public_table']} "
-        f"| start_date={resolved_configs['source']['start_date']} "
-        f"| end_date={resolved_configs['source']['end_date']}"
-    )
-
-    raw_data = run_stage("Extract", extract_data, resolved_configs)
-    
-    logging.info("Data extraction completed.")
-    
-    clean_data = run_stage("Transform", transform_data, raw_data, resolved_configs)
-    
-    logging.info("Data transformation completed.")
-    
-    pipeline_end = time.time()
-    
-    logging.info(
-        f"Pipeline completed successfully | Total runtime: {pipeline_end - pipeline_start:.2f} seconds"
-    )
+    run_pipeline(resolved_configs)
 
 if __name__ == "__main__":
     main()

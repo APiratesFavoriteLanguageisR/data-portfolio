@@ -6,7 +6,7 @@ def run_stage( stage_name: str, stage_function: callable, *args, **kwargs):
     Utility function to run a pipeline stage with standardized logging and error handling.
 
     Parameters
-    ----------
+    -----------
     stage_name : str
         Name of the pipeline stage (e.g., "Extract", "Transform", "Load").
     stage_function : callable
