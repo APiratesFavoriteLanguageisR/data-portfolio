@@ -9,10 +9,10 @@ def add_trip_duration(df):
     Uses pickup and dropoff timestamps to calculate trip duration.
     """
 
-    if {"tpep_pickup_datetime", "tpep_dropoff_datetime"}.issubset(df.columns):
+    if {"pickup_datetime", "dropoff_datetime"}.issubset(df.columns):
 
         df["trip_duration_minutes"] = (
-            df["tpep_dropoff_datetime"] - df["tpep_pickup_datetime"]
+            df["dropoff_datetime"] - df["pickup_datetime"]
         ).dt.total_seconds() / 60
 
     else:
@@ -28,10 +28,10 @@ def add_time_features(df):
     Extract useful time-based features from pickup datetime.
     """
 
-    if "tpep_pickup_datetime" in df.columns:
+    if "pickup_datetime" in df.columns:
 
-        df["pickup_hour"] = df["tpep_pickup_datetime"].dt.hour
-        df["pickup_day_of_week"] = df["tpep_pickup_datetime"].dt.dayofweek
+        df["pickup_hour"] = df["pickup_datetime"].dt.hour
+        df["pickup_day_of_week"] = df["pickup_datetime"].dt.dayofweek
         df["is_weekend"] = df["pickup_day_of_week"].isin([5, 6])
 
     else:
@@ -48,6 +48,8 @@ def add_fare_per_mile(df):
 
     Useful for analyzing fare efficiency across trips.
     """
+
+    logging.info(df[["fare_amount", "trip_distance"]].dtypes)
 
     if {"fare_amount", "trip_distance"}.issubset(df.columns):
 

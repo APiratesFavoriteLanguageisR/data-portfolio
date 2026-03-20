@@ -31,4 +31,7 @@ def transform_data(df, configs):
     rows_removed = rows_before - rows_after
     logging.info(f"Number of rows removed during transformation: {rows_removed}")
     
+    pct_removed = (rows_removed / rows_before) * 100 if rows_before > 0 else 0
+    logging.info(f"Percentage of rows removed: {pct_removed:.2f}%")
+    
     return df

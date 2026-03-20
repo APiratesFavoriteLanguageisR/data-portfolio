@@ -62,6 +62,12 @@ def round_numeric_columns(df, numeric_columns, decimals=2):
     # Convert only columns that exist
     for col in numeric_columns:
         if col in df.columns:
-            df[col] = pd.to_datetime(df[col], errors="coerce")
+            df[col] = pd.to_numeric(df[col], errors="coerce")
+            
+    for col in numeric_columns:
+        if col in df.columns:
+            invalid_count = df[col].isna().sum()
+            if invalid_count > 0:
+                raise ValueError(f"{col} has {invalid_count} invalid values after conversion")
 
     return df
