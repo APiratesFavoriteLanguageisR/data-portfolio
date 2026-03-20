@@ -49,8 +49,6 @@ def add_fare_per_mile(df):
     Useful for analyzing fare efficiency across trips.
     """
 
-    logging.info(df[["fare_amount", "trip_distance"]].dtypes)
-
     if {"fare_amount", "trip_distance"}.issubset(df.columns):
 
         df["fare_per_mile"] = df["fare_amount"] / df["trip_distance"]
