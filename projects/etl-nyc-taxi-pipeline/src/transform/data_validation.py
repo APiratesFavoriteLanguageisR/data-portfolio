@@ -21,26 +21,42 @@ def remove_invalid_rows(df, required_columns):
         The DataFrame with invalid rows removed.
     """
     
+    invalid_nulls = (~df[required_columns].notnull().all(axis=1)).sum()
+    invalid_passenger_low = (df['passenger_count'] <= 0).sum()
+    invalid_passenger_high = (df['passenger_count'] > 8).sum()
+    invalid_distance = (df['trip_distance'] <= 0).sum()
+    invalid_fare = (df['fare_amount'] <= 0).sum()
+    invalid_datetime = (df['pickup_datetime'] >= df['dropoff_datetime']).sum()
+    
+    logging.info(f"Rows removed due to nulls: {invalid_nulls}")
+    logging.info(f"Rows removed due to passenger_count <= 0: {invalid_passenger_low}")
+    logging.info(f"Rows removed due to passenger_count > 8: {invalid_passenger_high}")
+    logging.info(f"Rows removed due to trip_distance <= 0: {invalid_distance}")
+    logging.info(f"Rows removed due to fare_amount <= 0: {invalid_fare}")
+    logging.info(f"Rows removed due to pickup_datetime >= dropoff_datetime: {invalid_datetime}")
+    logging.info(f"Total rows removed: {invalid_nulls + invalid_passenger_low + invalid_passenger_high + invalid_distance + invalid_fare + invalid_datetime}")
+    
     #combine all below conditions into a single boolean to improve performance:
     mask = (
         df[required_columns].notnull().all(axis=1) &
         (df['passenger_count'] > 0) &
         (df['passenger_count'] <= 8) &
         (df['trip_distance'] > 0) &
-        (df['fare_amount'] > 0)
+        (df['fare_amount'] > 0) &
+        (df['pickup_datetime'] < df['dropoff_datetime'])
     )
     df = df[mask]
         
     return df
 
-def round_numeric_columns(df, numeric_columns, decimals=2):
+def enforce_numeric_types(df, numeric_columns):
     """
-    Round specified numeric columns in a DataFrame to a given number of decimal places.
+    Convert specified columns in a DataFrame to numeric types and coerce invalid values to NaN.
 
     Parameters
     ----------
     df : pandas.DataFrame
-        The DataFrame containing the numeric columns to be rounded.
+        The DataFrame containing the numeric columns to be converted.
     numeric_columns : list of str
         A list of column names that should be rounded.
     decimals : int, optional
@@ -68,6 +84,6 @@ def round_numeric_columns(df, numeric_columns, decimals=2):
         if col in df.columns:
             invalid_count = df[col].isna().sum()
             if invalid_count > 0:
-                raise ValueError(f"{col} has {invalid_count} invalid values after conversion")
+                logging.warning(f"{col} has {invalid_count} invalid values after conversion")
 
     return df

@@ -2,7 +2,7 @@ import pandas as pd
 import logging
 from .clean_columns import clean_column_names, drop_unused_columns
 from .datetime_conversions import convert_datetime_columns
-from .data_validation import remove_invalid_rows, round_numeric_columns
+from .data_validation import enforce_numeric_types, remove_invalid_rows
 from .feature_engineering import apply_feature_engineering
 
 def transform_data(df, configs):
@@ -21,7 +21,7 @@ def transform_data(df, configs):
     df = drop_unused_columns(df, configs["transform"]["drop_columns"])
     df = convert_datetime_columns(df, configs["transform"]["datetime_columns"])
     df = remove_invalid_rows(df, configs["transform"]["required_columns"])
-    df = round_numeric_columns(df, configs["transform"]["numeric_columns"])
+    df = enforce_numeric_types(df, configs["transform"]["numeric_columns"])
     df = apply_feature_engineering(df)
     
     logging.info("finished transform stage")

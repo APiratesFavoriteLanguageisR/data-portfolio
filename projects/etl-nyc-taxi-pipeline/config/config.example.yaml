@@ -15,3 +15,28 @@ targets:
 runtime:
   write_disposition: "WRITE_TRUNCATE"
   log_level: "INFO"
+
+transform:
+  datetime_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+
+  required_columns:
+    - "pickup_datetime"
+    - "dropoff_datetime"
+    - "passenger_count"
+    - "trip_distance"
+
+  numeric_columns:
+    - "fare_amount"
+    - "passenger_count"
+    - "trip_distance"
+
+  drop_columns:
+    - "store_and_fwd_flag"
+    - "ratecode_id"
+
+output:
+  output_path: "test_path/etl-nyc-taxi-pipeline/"
+
+parquet_engine: "pyarrow"
