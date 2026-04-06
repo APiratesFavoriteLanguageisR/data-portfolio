@@ -7,11 +7,6 @@ source:
   start_date: "2022-01-01"
   end_date: "2022-01-31"
 
-targets:
-  raw_table: "raw_yellow_trips"
-  staging_table: "stg_yellow_trips"
-  mart_table: "mart_yellow_trips"
-
 runtime:
   write_disposition: "WRITE_TRUNCATE"
   log_level: "INFO"
@@ -35,6 +30,11 @@ transform:
   drop_columns:
     - "store_and_fwd_flag"
     - "ratecode_id"
+
+filename:
+  raw: "raw_yellow_trips_{start_date}_to_{end_date}.parquet"
+  staging: "stg_yellow_trips_{start_date}_to_{end_date}.parquet"
+  mart: "mart_yellow_trips_{start_date}_to_{end_date}.parquet"
 
 output:
   output_path: "test_path/etl-nyc-taxi-pipeline/"

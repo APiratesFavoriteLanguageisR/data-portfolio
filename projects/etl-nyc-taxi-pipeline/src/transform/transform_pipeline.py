@@ -9,8 +9,11 @@ def transform_data(df, configs):
     """
     Apply transformations to the DataFrame.
 
-    This function can be expanded to include specific transformations related to date handling,
-    such as extracting year, month, day, or creating new features based on date columns.
+    This function performs a series of transformations on the input DataFrame,
+    including cleaning column names, dropping unused columns, converting datetime columns,
+    removing invalid rows based on specified criteria, enforcing numeric types for certain columns,
+    and applying feature engineering. It also logs the number of rows before and after transformation,
+    as well as the number and percentage of rows removed during the process.
     """
     
     logging.info("starting transform stage")

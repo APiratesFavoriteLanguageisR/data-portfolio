@@ -1,8 +1,6 @@
 import pandas as pd
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
 def convert_datetime_columns(df, datetime_columns):
     """
     Convert specified columns in a DataFrame to datetime format.

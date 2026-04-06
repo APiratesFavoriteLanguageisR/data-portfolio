@@ -1,7 +1,3 @@
-import logging
-
-logging.basicConfig(level=logging.INFO)
-
 def clean_column_names(df):
     """
     Clean and standardize column names by converting to lowercase, stripping whitespace, and replacing

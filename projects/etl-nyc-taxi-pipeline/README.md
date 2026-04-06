@@ -1,5 +1,9 @@
 # NYC Taxi ETL Pipeline
 
+## Why This Project
+
+This project demonstrates the design and implementation of a modular, production-style ETL pipeline, with a focus on data quality, configurability, and scalability.
+
 ## Overview
 This project implements a modular, config-driven ETL pipeline using NYC taxi trip data.
 
@@ -89,26 +93,71 @@ The following data quality rules are applied during the transformation stage to 
 - **Required columns must not be null**  
   Rows with missing values in critical fields are removed.
 
-## Key Challenges
+## Key Challenge: Debugging Data Type Issues in Feature Engineering
 
+One of the primary challenges encountered during this project stemmed from a subtle but impactful data type issue within the transformation stage.
 
+During feature engineering, the calculation of a fare-per-mile metric repeatedly failed. Initial inspection did not immediately reveal the cause, so additional logging was introduced to trace the issue. This revealed that the relevant columns had incorrect data types: `fare_amount` was stored as an object, while `trip_distance` had been incorrectly converted to a datetime.
 
-## Technologies
-Python
-Pandas
-BigQuery
-YAML configuration
+Using the debugger to step through the transformation pipeline, the root cause was identified. In the `datetime_conversions` module, `trip_distance` had been mistakenly included in the list of columns to convert, resulting in an invalid type transformation.
+
+After correcting this, attention turned to `fare_amount`, which required explicit type enforcement. This was resolved by incorporating the column into a custom `enforce_numeric_types` function, ensuring consistent numeric conversion with validation checks.
+
+Once both columns were correctly typed, the fare-per-mile calculation executed successfully.
+
+This issue highlighted the importance of:
+- careful data type management in ETL pipelines  
+- validating transformation steps incrementally  
+- using logging and debugging tools to isolate root causes  
+
+## Tech Stack
+
+- Python  
+- Pandas  
+- PyArrow  
+- Google BigQuery  
+- YAML (configuration management)  
+- Logging (Python standard library)
 
 ## Setup
 
-1. Clone the repository
-2. Copy the example configuration
+1. Clone the repository:
+   1. git clone https://github.com/APiratesFavoriteLanguageisR/data-portfolio.git
+2. Copy the example configuration file:
+   1. cp config/config.example.yaml config/config.yaml
+3. Update `config.yaml` with your environment settings:
+- BigQuery project ID  
+- Date range parameters  
+- Output path  
 
-    cp config/config.example.yaml config/config.yaml
+4. Create and activate a virtual environment:
+   1. python -m venv .venv
+5. Install required dependencies:
+   1. pip install -r requirements.txt
+6. Run the pipeline from the project root directory:
+   1. python -m src.main
+7. Run the test suite:
+   python -m pytest tests/ -v
 
-3. Update the configuration with your environment settings
 
-## Future Improvements
-Feature engineering
-Load stage
-Pipeline orchestration improvements
+## Output
+
+The pipeline generates a Parquet file containing an analytics-ready dataset.
+
+- File name is dynamically generated based on the selected date range  
+(e.g., `mart_yellow_trips_2022-01-01_to_2022-01-31.parquet`)
+- Output is stored in the configured output directory  
+- Data is written using PyArrow with columnar compression for efficient storage and analysis  
+
+
+## Tests
+
+The pipeline includes a unit test suite covering the core transformation logic.
+
+- **`tests/test_data_validation.py`** — Validates every filter rule in `remove_invalid_rows` and type coercion behavior in `enforce_numeric_types`
+- **`tests/test_feature_engineering.py`** — Verifies correctness of derived features: trip duration, time attributes, and fare-per-mile
+- **`tests/test_clean_columns.py`** — Confirms column name standardization and safe column dropping
+- **`tests/test_datetime_conversions.py`** — Checks datetime conversion, invalid coercion to NaT, and graceful handling of missing columns
+
+Run all tests from the project root:
+  python -m pytest tests/ -v

@@ -62,7 +62,6 @@ def extract_data(config: dict):
         SELECT *
         FROM `{config['source']['bq_public_table']}`
         WHERE pickup_datetime BETWEEN TIMESTAMP('{config['source']['start_date']}') AND TIMESTAMP('{config['source']['end_date']}')
-        LIMIT 1000
     """
     logging.info("Executing BigQuery extraction query.")
     

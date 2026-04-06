@@ -1,7 +1,6 @@
 import pandas as pd
 import logging
 
-logging.basicConfig(level=logging.INFO)
 
 def remove_invalid_rows(df, required_columns):
     """
@@ -34,7 +33,6 @@ def remove_invalid_rows(df, required_columns):
     logging.info(f"Rows removed due to trip_distance <= 0: {invalid_distance}")
     logging.info(f"Rows removed due to fare_amount <= 0: {invalid_fare}")
     logging.info(f"Rows removed due to pickup_datetime >= dropoff_datetime: {invalid_datetime}")
-    logging.info(f"Total rows removed: {invalid_nulls + invalid_passenger_low + invalid_passenger_high + invalid_distance + invalid_fare + invalid_datetime}")
     
     #combine all below conditions into a single boolean to improve performance:
     mask = (
