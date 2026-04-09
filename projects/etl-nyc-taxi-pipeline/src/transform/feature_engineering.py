@@ -14,6 +14,7 @@ def add_trip_duration(df):
         df["trip_duration_minutes"] = (
             df["dropoff_datetime"] - df["pickup_datetime"]
         ).dt.total_seconds() / 60
+        df["trip_duration_minutes"] = round(df["trip_duration_minutes"], 2)
 
     else:
         logging.warning(
@@ -52,6 +53,7 @@ def add_fare_per_mile(df):
     if {"fare_amount", "trip_distance"}.issubset(df.columns):
 
         df["fare_per_mile"] = df["fare_amount"] / df["trip_distance"]
+        df["fare_per_mile"] = round(df["fare_per_mile"], 2)
 
     else:
         logging.warning(
