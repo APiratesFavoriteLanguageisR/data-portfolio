@@ -12,7 +12,9 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+*.json
 
 # OS
 .DS_Store
 Thumbs.db
+dbt_internal_packages/
