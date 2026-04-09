@@ -6,6 +6,7 @@ from src.extract.extract_bq import extract_data
 from src.transform.transform_pipeline import transform_data 
 from src.utils.pipeline_utils import run_stage
 from src.load.write_parquet import write_parquet
+from src.load.load_to_bigquery import load_to_bigquery
 
 def run_pipeline(resolved_configs):
     
@@ -41,13 +42,22 @@ def run_pipeline(resolved_configs):
     output_path = os.path.join(resolved_configs["output"]["output_path"], file_name)
     
     run_stage(
-        "Load",
+        "Load - Parquet",
         write_parquet,
         clean_data,
         output_path
     )
     
     logging.info(f"Data loading completed. Parquet file written to {output_path}")
+    
+    run_stage(
+        "Load - Bigquery",
+        load_to_bigquery,
+        clean_data,
+        resolved_configs
+    )
+    
+    logging.info(f"Data loading completed. Data loaded into BigQuery table {resolved_configs['gcp']['dataset_id']}.{resolved_configs['gcp']['table_id']}")
     
     pipeline_end = time.time()
     

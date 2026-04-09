@@ -134,6 +134,9 @@ This issue highlighted the importance of:
    1. python -m venv .venv
 5. Install required dependencies:
    1. pip install -r requirements.txt
+   2. run `pip install -r requirements.txt`
+   3. Obtain a service account key and set:
+        GOOGLE_APPLICATION_CREDENTIALS=path/to/your/key.json
 6. Run the pipeline from the project root directory:
    1. python -m src.main
 7. Run the test suite:

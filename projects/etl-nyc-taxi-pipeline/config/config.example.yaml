@@ -1,6 +1,7 @@
 gcp:
   project_id: "your-gcp-project-id"
   dataset_id: "portfolio_nyc_taxi"
+  table_id: "yellow_trips"
 
 source:
   bq_public_table: "bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2022"
