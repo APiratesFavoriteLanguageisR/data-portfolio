@@ -145,12 +145,18 @@ This issue highlighted the importance of:
 
 ## Output
 
-The pipeline generates a Parquet file containing an analytics-ready dataset.
+1. The pipeline generates a Parquet file containing an analytics-ready dataset.
 
 - File name is dynamically generated based on the selected date range  
 (e.g., `mart_yellow_trips_2022-01-01_to_2022-01-31.parquet`)
 - Output is stored in the configured output directory  
-- Data is written using PyArrow with columnar compression for efficient storage and analysis  
+- Data is written using PyArrow with columnar compression for efficient storage and analysis
+
+2. The pipeline uploads the data to a BigQuery Table.
+
+- Table name is specified in the congig file.
+- Output is the project and dataset also specified in the config file.
+- The schema is auto-detected, but can be manually entered if needed.
 
 
 ## Tests
