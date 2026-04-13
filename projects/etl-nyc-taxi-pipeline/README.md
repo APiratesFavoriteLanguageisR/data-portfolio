@@ -41,6 +41,7 @@ The pipeline follows a modular Extract → Transform → Load (ETL) architecture
 ### Load Stage
 - The final transformed dataset is written to a Parquet file using PyArrow.
 - Parquet is used to preserve schema and enable efficient, columnar storage for downstream analytics.
+- Also, the data is uploaded to a bigquery table.
 
 ## Key Features
 
