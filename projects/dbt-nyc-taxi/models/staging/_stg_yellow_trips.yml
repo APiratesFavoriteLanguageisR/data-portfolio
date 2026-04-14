@@ -1,0 +1,9 @@
+models:
+  - name: stg_yellow_trips
+    description: "Staging model for yellow taxi trip data."
+    columns:
+      - name: trip_id
+        description: "Surrogate key generated from pickup_datetime, pickup_location_id, vendor_id, dropoff_datetime, dropoff_location_id, and total_amount. Source data contains duplicate pickup combinations, requiring fare information to guarantee uniqueness."
+        data_tests:
+          - not_null
+          - unique

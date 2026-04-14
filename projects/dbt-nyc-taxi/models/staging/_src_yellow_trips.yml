@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: yellow_trips
+    database: forward-walker-464619-e9
+    schema: portfolio_nyc_taxi
+    description: "Yellow taxi trip data for the year 2022."
+    tables:
+      - name: yellow_trips
+        description: "Raw yellow taxi trip data for the year 2022, including pickup and dropoff locations, timestamps, and fare information."
+        columns:
+          - name: vendor_id
+            description: "The ID of the vendor associated with the trip."
+            data_tests:
+              - not_null
