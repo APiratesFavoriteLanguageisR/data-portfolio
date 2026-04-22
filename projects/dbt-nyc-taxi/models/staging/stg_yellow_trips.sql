@@ -6,7 +6,7 @@ SELECT
     'dropoff_datetime',
     'dropoff_location_id',
     'total_amount'
-    ]) }} AS trip_id
+    ]) }} AS trip_id,
     vendor_id,
     pickup_datetime,
     dropoff_datetime,
