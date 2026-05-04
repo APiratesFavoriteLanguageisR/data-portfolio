@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_trip_categorization
+    description: "Intermediate model for categorizing taxi trips based on various attributes such as trip distance, fare amount, and time of day to facilitate analysis of trip patterns."
+    columns:
+      - name: trip_category
+        description: "Categorical variable indicating the category of the trip based on defined criteria for distance(e.g., 'Short Trip', 'Medium Trip', 'Long Trip', 'Very Long Trip')."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Short Trip', 'Medium Trip', 'Long Trip', 'Very Long Trip', 'Invalid Trip', 'Unknown']

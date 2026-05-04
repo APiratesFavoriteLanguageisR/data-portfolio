@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: mart_trips
+    description: "Mart model for taxi trip data, aggregating and transforming raw trip data into a structured format for analysis and reporting."
+    columns:
+      - name: trip_id
+        description: "Unique identifier for each taxi trip."
+        tests:
+          - not_null
+          - unique

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_payment_type
+    description: "Intermediate model for payment type data, transforming raw payment type information into a more structured format for analysis."
+    columns:
+      - name: payment_type_description
+        description: "The method of payment used for the trip, such as credit card, cash, or other forms of payment."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Credit Card', 'Cash', 'No Charge', 'Dispute', 'Unknown', 'Voided Trip']

@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_time_buckets
+    description: "Intermediate model for categorizing pickup times into time buckets (e.g., morning, afternoon, evening, night) to facilitate time-based analysis of taxi trips."
+    columns:
+      - name: pickup_time_bucket
+        description: "Categorical variable indicating the time bucket for the pickup time, such as 'Early Morning', 'Morning Rush', 'Midday', 'Evening Rush', 'Evening', or 'Overnight'."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Early Morning', 'Morning Rush', 'Midday', 'Evening Rush', 'Evening', 'Overnight', 'Unknown']
