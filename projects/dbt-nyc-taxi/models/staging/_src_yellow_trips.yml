@@ -11,5 +11,5 @@ sources:
         columns:
           - name: vendor_id
             description: "The ID of the vendor associated with the trip."
-            data_tests:
+            tests:
               - not_null
