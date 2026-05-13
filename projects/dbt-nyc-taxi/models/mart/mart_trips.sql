@@ -13,7 +13,11 @@ itb.pickup_time_bucket,
 itb.pickup_day_of_week, 
 itb.is_weekend, 
 itc.trip_distance, 
-itc.trip_category, 
+itc.trip_category,
+CASE
+    WHEN itc.trip_category = 'Invalid Trip' THEN 0
+    ELSE 1
+END AS is_valid_trip,
 ipt.payment_type, 
 ipt.payment_type_description, 
 ipt.fare_amount, 

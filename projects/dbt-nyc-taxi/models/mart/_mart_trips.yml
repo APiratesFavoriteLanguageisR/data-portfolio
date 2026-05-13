@@ -9,3 +9,26 @@ models:
         tests:
           - not_null
           - unique
+      - name: payment_type_description
+        description: "Description of the payment type used for the trip."
+        tests:
+          - not_null
+      - name: trip_category
+        description: "Categorization of the trip based on trip distance. Invalid trips are flagged."
+        tests:
+          - not_null
+      - name: trip_distance
+        description: "Distance of the trip in miles. Source data contains outliers, trips exceeding 100 miles are categorized as Very Long Trip and likely represent data quality issues."
+        tests:
+          - not_null
+      - name: pickup_time_bucket
+        description: "Time bucket for the pickup time, categorized into hourly intervals."
+        tests:
+          - not_null
+      - name: is_valid_trip
+        description: "Flag indicating whether the trip is valid based on its category. Trips categorized as 'Invalid Trip' are flagged as 0, while all other trips are flagged as 1."
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+              quote: false

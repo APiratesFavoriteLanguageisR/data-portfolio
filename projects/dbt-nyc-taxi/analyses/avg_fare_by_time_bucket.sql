@@ -9,4 +9,5 @@ Round(AVG(trip_duration_minutes), 2) as avg_trip_duration,
 Round(AVG(tip_amount), 2) as avg_tip_amount,
 COUNT(*) as trip_count
 FROM {{ref('mart_trips')}}
+WHERE is_valid_trip = 1
 GROUP BY pickup_time_bucket

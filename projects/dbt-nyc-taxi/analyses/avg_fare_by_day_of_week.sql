@@ -16,5 +16,6 @@ END AS day_of_week_name,
 Round(AVG(fare_amount), 2) as avg_fare,
 COUNT(*) as trip_count
 FROM {{ref('mart_trips')}}
+WHERE is_valid_trip = 1
 GROUP BY pickup_day_of_week
 ORDER BY pickup_day_of_week

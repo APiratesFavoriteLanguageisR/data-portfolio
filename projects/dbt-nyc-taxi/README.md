@@ -80,7 +80,7 @@ The main focus of the analyses conducted was regarding January 2022 taxi fares a
 - When comparing fares by days of the week, interestingly there was not a significant difference  [range: $12.15 - $13.72]. That being said, Friday and Sunday tended to trend on the higher side, while Saturday tended to trend lower, showing the disparity between seemingly similar days.
 - There also was not a significant difference when comparing taxi fares by weekends vs weekdays.
 - The pattern changes, however, when comparing taxi fares by time of day. Some interesting findings show that early mornings (5am - 8am) have the highest fare [$14.03], while trips during the morning rush (8 am - 11am) showed the lowest fare as well as tips. The highest average tips are found in taxi trips that are performed overnight (10 pm - 5 am).
-- One last analysis, this time comparing tips by days of the week, show that Sunday is the day that sees the highest average tips [$2.55], while Wednesday sees the lowest average. 
+- One last analysis, this time comparing tips by days of the week, show that Sunday is the day that sees the highest average tips [$2.55], while Wednesday sees the lowest average.
 
 # What is Next
 
