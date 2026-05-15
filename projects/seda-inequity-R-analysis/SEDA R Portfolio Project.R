@@ -78,7 +78,9 @@ seda_data_filtered %>%
   ) +
   theme_minimal(base_size = 13)
 
-####################################### County Comparisons###########################################################
+ggsave("outputs/plots/01_achievement_over_time.png", width = 10, height = 6, dpi = 300, bg = "white")
+
+####################################### County Comparisons ###########################################################
 
 # Step 1: Filter for ELA and exclude NA values
 ela_county_summary <- seda_data_filtered %>%
@@ -109,7 +111,7 @@ ggplot(top_bottom_ela, aes(x = reorder(sedacountyname, avg_score), y = avg_score
   scale_fill_manual(values = c("TRUE" = "#4daf4a", "FALSE" = "#e41a1c")) +
   theme_minimal(base_size = 13)
 
-
+ggsave("outputs/plots/02_ela_county_unweighted.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 # Step 1: Filter for ELA and exclude NA values
 ela_weighted_county <- seda_data_filtered %>%
@@ -133,14 +135,14 @@ ggplot(top_bottom_ela, aes(x = reorder(sedacountyname, weighted_avg ), y = weigh
   geom_col(show.legend = FALSE) +
   coord_flip() +
   labs(
-    title = "Top and Bottom Performing Counties in ELA (2009–2018)",
+    title = "Top and Bottom Performing Counties in ELA - weighted (2009–2018)",
     x = "County",
     y = "Mean Deviation from National Average (SD units)"
   ) +
   scale_fill_manual(values = c("TRUE" = "#4daf4a", "FALSE" = "#e41a1c")) +
   theme_minimal(base_size = 13)
 
-
+ggsave("outputs/plots/03_ela_county_weighted.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 
 # Step 1: Filter for Math and exclude NA values
@@ -172,7 +174,7 @@ ggplot(top_bottom_math, aes(x = reorder(sedacountyname, avg_score), y = avg_scor
   scale_fill_manual(values = c("TRUE" = "#4daf4a", "FALSE" = "#e41a1c")) +
   theme_minimal(base_size = 13)
 
-
+ggsave("outputs/plots/04_math_county_unweighted.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 # Step 1: Filter for Math and exclude NA values
 math_weighted_county <- seda_data_filtered %>%
@@ -196,12 +198,15 @@ ggplot(top_bottom_math, aes(x = reorder(sedacountyname, weighted_avg ), y = weig
   geom_col(show.legend = FALSE) +
   coord_flip() +
   labs(
-    title = "Top and Bottom Performing Counties in Math (2009–2018)",
+    title = "Top and Bottom Performing Counties in Math - weighted (2009–2018)",
     x = "County",
     y = "Mean Deviation from National Average (SD units)"
   ) +
   scale_fill_manual(values = c("TRUE" = "#4daf4a", "FALSE" = "#e41a1c")) +
   theme_minimal(base_size = 13)
+
+ggsave("outputs/plots/05_math_county_weighted.png", width = 10, height = 6, dpi = 300, bg = "white")
+
 ########################################## SED Comparison ###########################################################
 
 ###ELA###
@@ -228,6 +233,8 @@ ggplot(ela_equity_data, aes(x = year, y = Score, color = Group)) +
   ) +
   theme_minimal(base_size = 13)
 
+ggsave("outputs/plots/06_ela_by_economic_status.png", width = 10, height = 6, dpi = 300, bg = "white")
+
 ###Math###
 # dplyr::summarize and reshape the data
 math_equity_data <- seda_data_filtered %>%
@@ -252,8 +259,9 @@ ggplot(math_equity_data, aes(x = year, y = Score, color = Group)) +
   )+
   theme_minimal(base_size = 13)
 
-########################################## Race Comparison ##########################################################
+ggsave("outputs/plots/07_math_by_economic_status.png", width = 10, height = 6, dpi = 300, bg = "white")
 
+########################################## Race Comparison ##########################################################
 
 # Recreate your long-format data frame including All Students
 ela_race_long <- seda_data_filtered %>%
@@ -301,6 +309,8 @@ ggplot(ela_race_summary, aes(x = year, y = mean_score, color = group)) +
     "Multi_Racial" = "orange"
   ))
 
+ggsave("outputs/plots/08_ela_by_race.png", width = 10, height = 6, dpi = 300, bg = "white")
+
 math_race_long <- seda_data_filtered %>%
   filter(subject == "mth") %>%
   select(year, cs_mn_all, cs_mn_blk, cs_mn_hsp, cs_mn_wht, cs_mn_asn, cs_mn_mtr, cs_mn_nam) %>%
@@ -346,8 +356,10 @@ ggplot(math_race_summary, aes(x = year, y = mean_score, color = group)) +
     "Multi_Racial" = "orange"
   ))
 
+ggsave("outputs/plots/09_math_by_race.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 ######################################### Gender Comparison #########################################################
+
 # ELA - Gender Achievement
 ela_gender_data <- seda_data_filtered %>%
   filter(subject == "rla") %>%
@@ -372,6 +384,8 @@ ggplot(ela_gender_data, aes(x = year, y = Score, color = Group)) +
   ) +
   theme_minimal(base_size = 13)
 
+ggsave("outputs/plots/10_ela_by_gender.png", width = 10, height = 6, dpi = 300, bg = "white")  
+
 # Math - Gender Achievement
 math_gender_data <- seda_data_filtered %>%
   filter(subject == "mth") %>%
@@ -395,6 +409,8 @@ ggplot(math_gender_data, aes(x = year, y = Score, color = Group)) +
     x = "Year", y = "Mean Deviation from National Average (SD units)"
   ) +
   theme_minimal(base_size = 13)
+
+ggsave("outputs/plots/11_math_by_gender.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 ############################################## Model ################################################################
 
@@ -455,11 +471,17 @@ summary(pca_result)
 # View loadings (eigenvectors for PCs)
 pca_result$rotation
 
-plot(pca_result, type = "l", main = "Scree Plot of PCA")
+png("outputs/plots/12_ela_pca_scree.png", width = 1000, height = 600, res = 300)
+plot(pca_result, type = "l", main = "ELA PCA Scree Plot")
+dev.off()
 
-biplot(pca_result, scale = 0)
+png("outputs/plots/13_ela_pca_biplot_base.png", width = 1000, height = 600, res = 300)
+biplot(pca_result, scale = 0, main = "ELA PCA Biplot")
+dev.off()
 
-fviz_pca_biplot(pca_result, repel = TRUE)
+fviz_pca_biplot(pca_result, repel = TRUE) +
+  ggtitle("ELA PCA Biplot")
+ggsave("outputs/plots/14_ela_pca_biplot_fviz.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 # Add PC scores to your dataset
 model_df$PC1 <- pca_result$x[,1]
@@ -479,6 +501,8 @@ ggplot(model_df, aes(x = PC1, y = avg_score, label = sedacountyname)) +
     y = "Average ELA Achievement (SD Units)"
   ) +
   theme_minimal(base_size = 13)
+
+ggsave("outputs/plots/15_ela_pc1_correlation.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 ## Math
 # Step 1: Aggregate weighted average Math score by county
@@ -531,10 +555,17 @@ summary(pca_result_math)
 pca_result_math$rotation
 
 # Visuals
-plot(pca_result_math, type = "l", main = "Scree Plot of PCA (Math)")
-biplot(pca_result_math, scale = 0)
+png("outputs/plots/16_math_pca_scree.png", width = 1000, height = 600, res = 300)
+plot(pca_result_math, type = "l", main = "Math PCA Scree Plot")
+dev.off()
 
-fviz_pca_biplot(pca_result_math, repel = TRUE)
+png("outputs/plots/17_math_pca_biplot_base.png", width = 1000, height = 600, res = 300)
+biplot(pca_result_math, scale = 0, main = "Math PCA Biplot")
+dev.off()
+
+fviz_pca_biplot(pca_result_math, repel = TRUE) +
+  ggtitle("Math PCA Biplot")
+ggsave("outputs/plots/18_math_pca_biplot_fviz.png", width = 10, height = 6, dpi = 300, bg = "white")
 
 # Step 7: Correlate PC1 with avg Math score
 model_df_math$PC1 <- pca_result_math$x[,1]
@@ -554,3 +585,5 @@ ggplot(model_df_math, aes(x = PC1, y = avg_score, label = sedacountyname)) +
     y = "Average Math Achievement (SD Units)"
   ) +
   theme_minimal(base_size = 13)
+
+ggsave("outputs/plots/19_math_pc1_correlation.png", width = 10, height = 6, dpi = 300, bg = "white")
