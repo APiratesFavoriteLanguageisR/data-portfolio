@@ -25,7 +25,6 @@ seda_data <- read.csv("./data/seda_county_long_cs_4.1 - Cali.csv")
 seda_data <- clean_names(seda_data)
 
 seda_data_filtered <- filter(seda_data, stateabb == "CA")
-View(seda_data_filtered)
 
 ##Exploratory Section###
 
@@ -61,7 +60,7 @@ seda_data_filtered %>%
   group_by(year, subject) %>%
   dplyr::summarize(mean_score = mean(cs_mn_all, na.rm = TRUE), .groups = "drop") %>%
   ggplot(aes(x = year, y = mean_score, color = subject)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point(size = 2) +
   geom_label_repel(
     aes(label = round(mean_score, 2)), 
@@ -223,7 +222,7 @@ ela_equity_data <- seda_data_filtered %>%
 
 # Plot with labels for all years
 ggplot(ela_equity_data, aes(x = year, y = Score, color = Group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point() +
   geom_label_repel(aes(label = round(Score, 2)), vjust = -0.6, size = 3) +
   labs(
@@ -249,7 +248,7 @@ math_equity_data <- seda_data_filtered %>%
 
 # Plot with labels for all years
 ggplot(math_equity_data, aes(x = year, y = Score, color = Group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point() +
   geom_label_repel(aes(label = round(Score, 2)), vjust = -0.6, size = 3) +
   labs(
@@ -288,7 +287,7 @@ ela_race_summary <- ela_race_long %>%
 
 # Plot with line, points, and labels
 ggplot(ela_race_summary, aes(x = year, y = mean_score, color = group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point(size = 2) +
   geom_text_repel(aes(label = round(mean_score, 2)), size = 3, show.legend = FALSE) +
   labs(
@@ -335,7 +334,7 @@ math_race_summary <- math_race_long %>%
 
 # Plot with line, points, and labels
 ggplot(math_race_summary, aes(x = year, y = mean_score, color = group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point(size = 2) +
   geom_text_repel(aes(label = round(mean_score, 2)), size = 3, show.legend = FALSE) +
   labs(
@@ -374,7 +373,7 @@ ela_gender_data <- seda_data_filtered %>%
 
 # Plot ELA gender graph
 ggplot(ela_gender_data, aes(x = year, y = Score, color = Group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point() +
   geom_label_repel(aes(label = round(Score, 2)), vjust = -0.6, size = 3) +
   labs(
@@ -400,7 +399,7 @@ math_gender_data <- seda_data_filtered %>%
 
 # Plot Math gender graph
 ggplot(math_gender_data, aes(x = year, y = Score, color = Group)) +
-  geom_line(size = 1.2) +
+  geom_line(linewidth = 1.2) +
   geom_point() +
   geom_label_repel(aes(label = round(Score, 2)), vjust = -0.6, size = 3) +
   labs(
@@ -463,7 +462,7 @@ pca_vars <- model_df %>%
 # rather than PC1, likely due to smaller and less variable Black populations across
 # California counties compared to Hispanic populations. PCA findings should be
 # interpreted at the county level, not as a measure of individual student experience.
-pca_result <- prcomp(pca_vars, center = TRUE, scale. = TRUE)
+pca_result <- prcomp(pca_vars, center = FALSE, scale. = FALSE)
 
 # Summary of variance explained
 summary(pca_result)
@@ -514,7 +513,8 @@ math_scores <- seda_data_filtered %>%
     .groups = "drop"
   )
 
-# Step 2: Reuse demographic proportions from ELA (same structure, totals)
+# Step 2: Recreate demographic proportions (same structure, totals)
+# This is not needed but helps ensure the same base for demographics across subjects, since the demographic totals should be the same regardless of subject.
 # If needed, change 'rla' to 'mth' in demographic block, but using 'rla' ensures shared base
 
 demographics <- seda_data_filtered %>%
@@ -548,7 +548,7 @@ pca_vars_math <- model_df_math %>%
   select(pct_ecd, pct_blk, pct_wht, pct_hsp, pct_asn, pct_mtr) %>%
   scale()
 
-pca_result_math <- prcomp(pca_vars_math, center = TRUE, scale. = TRUE)
+pca_result_math <- prcomp(pca_vars_math, center = FALSE, scale. = FALSE)
 
 # Step 6: Output
 summary(pca_result_math)
