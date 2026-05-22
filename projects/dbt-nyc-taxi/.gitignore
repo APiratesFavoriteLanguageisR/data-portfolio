@@ -1,8 +1,6 @@
 # Virtual environment
 venv/
 
-CLAUDE.md
-
 # dbt
 target/
 dbt_packages/
