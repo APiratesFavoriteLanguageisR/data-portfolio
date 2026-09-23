@@ -30,5 +30,6 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: [0, 1]
-              quote: false
+              arguments:
+                values: [0, 1]
+                quote: false

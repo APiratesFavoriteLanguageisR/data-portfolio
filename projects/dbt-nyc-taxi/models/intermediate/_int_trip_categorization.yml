@@ -9,4 +9,5 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['Short Trip', 'Medium Trip', 'Long Trip', 'Very Long Trip', 'Invalid Trip', 'Unknown']
+              arguments:
+                values: ['Short Trip', 'Medium Trip', 'Long Trip', 'Very Long Trip', 'Invalid Trip', 'Unknown']

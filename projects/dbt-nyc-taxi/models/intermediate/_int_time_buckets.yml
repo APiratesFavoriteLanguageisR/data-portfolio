@@ -9,4 +9,5 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['Early Morning', 'Morning Rush', 'Midday', 'Evening Rush', 'Evening', 'Overnight', 'Unknown']
+              arguments:
+                values: ['Early Morning', 'Morning Rush', 'Midday', 'Evening Rush', 'Evening', 'Overnight', 'Unknown']

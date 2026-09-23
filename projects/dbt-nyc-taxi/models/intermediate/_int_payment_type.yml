@@ -9,4 +9,5 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['Credit Card', 'Cash', 'No Charge', 'Dispute', 'Unknown', 'Voided Trip']
+              arguments:
+                values: ['Credit Card', 'Cash', 'No Charge', 'Dispute', 'Unknown', 'Voided Trip']
