@@ -4,7 +4,7 @@ This project is the transformation layer of a multi-stage data pipeline built on
 
 # Tech Stack
 
-- dbt Core 1.11.8 — transformation framework used to transition a cleaned dataset into an analytics-ready dataset.
+- dbt 2.0 (Fusion engine) — transformation framework used to transition a cleaned dataset into an analytics-ready dataset.
 - BigQuery — data warehouse where models are materialized. Houses the data and models.
 - dbt-utils — dbt package used for surrogate key generation (`generate_surrogate_key`). A surrogate key was needed due to the absence of a useable primary key.
 - Python / pip — for managing the dbt environment and installing needed dependencies.
@@ -39,20 +39,24 @@ The mart layer model joins all upstream models into a final table that can be us
 
 A lineage graph screenshot can be seen below:
 
-![alt text](snapshots/lineage_graph.png)
+![Lineage graph](images/lineage_graph.png)
 
 # How to Run
 
 ## Prerequisites
 
 - Clone the Repo
-- install dbt Core via `pip install dbt-bigquery`
+- Create and activate a virtual environment (recommended, keeps this project's dependencies isolated):
+  - `python -m venv .venv`
+  - `.venv\Scripts\activate` (Windows) or `source .venv/bin/activate` (Mac/Linux)
+- install dbt v2/Fusion via `pip install dbt`
   - dbt installation can be found in the official dbt docs: https://docs.getdbt.com/
 - Python 3.9+ is needed
-- install python dependencies with `pip install -r requirements.txt`
+- install python/enviornment dependencies with `pip install -r requirements.txt`
 - A Google Cloud project with the BigQuery API enabled
 - A service account key with BigQuery permissions needs to be created
 - `GOOGLE_APPLICATION_CREDENTIALS` environment variable set to your key file path
+- The raw 'yellow_trips' table must exist in your BigQuery portfolio_nyc_taxi dataset; run the ETL pipeline first
 - Git should be installed for version control
 - configure profiles.yml for your dbt profile. This file should include information such as the data source and connection method.
   - can be found here: ~/.dbt/profiles.yml
