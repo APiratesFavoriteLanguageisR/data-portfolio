@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: yellow_trips
-    database: forward-walker-464619-e9
+    database: "{{ target.project }}"
     schema: portfolio_nyc_taxi
     description: "Yellow taxi trip data for the year 2022."
     tables:
