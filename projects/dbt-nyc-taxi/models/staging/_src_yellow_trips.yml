@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: yellow_trips
-    database: "{{ target.project }}"
+    database: "{{ target.project if target.type == 'bigquery' else target.database }}"
     schema: portfolio_nyc_taxi
     description: "Yellow taxi trip data for the year 2022."
     tables:

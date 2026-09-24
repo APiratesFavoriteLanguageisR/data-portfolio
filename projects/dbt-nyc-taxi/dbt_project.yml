@@ -3,7 +3,9 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_nyc_taxi'
-version: '1.0.0'
+
+# ensures the project runs on v2+, failing early with a clear message on older dbt
+require-dbt-version: ">=2.0.0"
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_nyc_taxi'

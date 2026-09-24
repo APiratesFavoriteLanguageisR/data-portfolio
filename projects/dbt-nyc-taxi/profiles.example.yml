@@ -1,0 +1,25 @@
+# profiles.example.yml
+# Copy this to ~/.dbt/profiles.yml and fill in your own values.
+# dbt reads ~/.dbt/profiles.yml, NOT this file — this is a template only.
+
+dbt_nyc_taxi:
+  target: dev                          # default to DuckDB so the project runs with zero cloud setup
+  outputs:
+
+    dev:                               # local DuckDB — no credentials required
+      type: duckdb
+      path: "path/to/your/dev.duckdb"  # where the load script wrote dev.duckdb (project root by default)
+      schema: main
+      threads: 4
+
+    prod:                              # BigQuery — only needed if you have your own GCP project
+      type: bigquery
+      method: service-account
+      project: "your-gcp-project-id"
+      dataset: dbt_nyc_taxi
+      keyfile: "path/to/your/service-account-key.json"
+      location: US
+      threads: 1
+      priority: interactive
+      job_execution_timeout_seconds: 300
+      job_retries: 1
