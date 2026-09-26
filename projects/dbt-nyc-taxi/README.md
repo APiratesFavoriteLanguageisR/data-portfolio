@@ -64,6 +64,7 @@ Runs the entire project locally against a DuckDB file, no Google Cloud account, 
 1. Obtain the raw data as a Parquet file (produced by the upstream `etl-nyc-taxi-pipeline` project).
 2. Load the Parquet into a local DuckDB file:
    - `python scripts/load_parquet_to_duckdb.py --parquet path/to/yellow_trips.parquet`
+    - if using the default path from the example config file, it should be something like ...\test_path\etl-nyc-taxi-pipeline\mart_yellow_trips_2022-01-01_to_2022-01-31.parquet
    - This creates `dev.duckdb` in the project root.
 3. In `~/.dbt/profiles.yml`, set the `dev` target's `path` to your `dev.duckdb` location.
 4. Build the project: `dbt build --target dev`

@@ -137,8 +137,8 @@ This issue highlighted the importance of:
    1. pip install -r requirements.txt
    2. run `pip install -r requirements.txt`
       1. If the google-cloud-bigquery import doesn't work - Windows: enable long paths (LongPathsEnabled=1) before installing, or the google-cloud-bigquery install may fail with WinError 206
-   3. Obtain a service account key and set:
-        GOOGLE_APPLICATION_CREDENTIALS=path/to/your/key.json
+   3. Obtain a service account key and set for the current session:
+        $env:GOOGLE_APPLICATION_CREDENTIALS = "C:\path\to\your\key.json"
 6. Run the pipeline from the project root directory:
    1. python -m src.main
 7. Run the test suite:
