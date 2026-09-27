@@ -1,0 +1,24 @@
+# Secrets and machine-specific config — MUST stay external, mounted at runtime
+config.yaml
+*.json                      
+
+# Virtual environments (huge, machine-specific)
+.venv/
+venv/
+
+# Python cruft
+__pycache__/
+*.pyc
+*.pyo
+
+# Pipeline output — regenerated at runtime, not part of the image
+*.parquet
+data/
+logs/
+
+# Dev/tooling
+.git/
+.gitignore
+.pytest_cache/
+tests/                      
+*.md                        
