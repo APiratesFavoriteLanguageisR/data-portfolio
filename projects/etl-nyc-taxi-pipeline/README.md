@@ -145,6 +145,16 @@ This issue highlighted the importance of:
    python -m pytest tests/ -v
 8. If needed, deactivate the virtual enviornment with `deactivate`
 
+## Run with Docker
+
+Build the image:
+`docker build -t nyc-taxi-etl .`
+
+Run the pipeline (mount your config and service-account key; nothing sensitive is baked into the image):
+`docker run --rm -v /path/to/config.yaml:/app/config/config.yaml -v /path/to/key.json:/app/creds/key.json -e GOOGLE_APPLICATION_CREDENTIALS=/app/creds/key.json nyc-taxi-etl`
+
+Requires a Google Cloud project with BigQuery access (see Option B prerequisites).
+
 
 ## Output
 
